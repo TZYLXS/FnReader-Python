@@ -1,0 +1,32 @@
+{
+  "bookSourceName": "arXiv",
+  "bookSourceUrl": "http://export.arxiv.org",
+  "bookSourceGroup": "学术搜索",
+  "bookSourceType": 3,
+  "searchUrl": "@js:'http://export.arxiv.org/api/query?search_query=all:' + encodeURIComponent(key) + '&start=' + (page-1)*10 + '&max_results=10'",
+  "ruleSearch": {
+    "bookList": "tag.entry",
+    "name": "tag.title@text",
+    "author": "tag.author@tag.name@text",
+    "kind": "tag.category@term",
+    "intro": "tag.summary@text",
+    "bookUrl": "tag.id@text",
+    "coverUrl": ""
+  },
+  "ruleBookInfo": {
+    "name": "tag.title@text",
+    "author": "tag.author@tag.name@text",
+    "intro": "tag.summary@text",
+    "coverUrl": "",
+    "tocUrl": ""
+  },
+  "ruleToc": {
+    "chapterList": "",
+    "chapterName": "",
+    "chapterUrl": ""
+  },
+  "ruleContent": {
+    "content": "tag.summary@text",
+    "nextContentUrl": ""
+  }
+}
