@@ -1,6 +1,6 @@
 """@js: 沙箱。
 
-Legado 用 Rhino 跑书源里的 JS。Python 侧没有内置 JS 引擎，因此这里抽象出一个
+Rhino 跑书源里的 JS。Python 侧没有内置 JS 引擎，因此这里抽象出一个
 ``JsEngine``，后端按优先级自动选择：
 
 1. ``quickjs``      —— pip 可装的嵌入式 ES2020 引擎，纯 Python 调用，无外部进程；
@@ -56,7 +56,7 @@ var __bridge = {
 };
 
 var java = {
-  // Kotlin 签名：getString(rule, mContent = null, isUrl = false)
+  // 签名：getString(rule, mContent = null, isUrl = false)
   getString: function (rule, mContent, isUrl) {
     var r = __bridge.call('getString', [String(rule),
       (mContent === undefined ? null : String(mContent)), !!isUrl]);
@@ -159,7 +159,7 @@ class JsEngine:
         if host is None:
             return None
         if name == "getString":
-            # Kotlin 签名：getString(rule, mContent = null, isUrl = false)
+            # 签名：getString(rule, mContent = null, isUrl = false)
             content, is_url = None, False
             if len(args) > 1:
                 if isinstance(args[1], bool):
@@ -286,7 +286,7 @@ process.stdin.on('end', () => {
 def _jsonable(value: Any) -> Any:
     """把绑定转成可 JSON 化的值。
 
-    ``result`` / ``src`` 在"按条目取值"时是 lxml 元素，Kotlin 那边是
+    ``result`` / ``src`` 在"按条目取值"时是 lxml 元素，
     ``Jsoup.Element`` 对象（JS 里做字符串运算会走 toString，即 outerHtml），
     这里做同样的降级：元素 → outerHtml，其余不可序列化的 → str。
     """

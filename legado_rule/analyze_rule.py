@@ -29,7 +29,7 @@ from .models import BaseSource, Book, BookChapter, RuleData
 from .source_rule import Mode, SourceRule, is_json_text
 
 def _to_text(value: Any) -> str:
-    """Kotlin ``Any.toString()`` 的对齐版本：布尔小写，其余走 str()。"""
+    """``toString`` 版本：布尔小写，其余走 str()。"""
     if isinstance(value, bool):
         return "true" if value else "false"
     if value is None:
@@ -40,9 +40,9 @@ def _to_text(value: Any) -> str:
 
 
 def java_replacement(replacement: str) -> str:
-    """把 Java/Kotlin 风格的替换串翻译成 Python ``re.sub`` 的写法。
+    """把 Java 风格的替换串翻译成 Python ``re.sub`` 的写法。
 
-    Legado 的 ``##正则##$1###`` 里 ``$1`` 是**捕获组引用**（Kotlin
+    ``##正则##$1###`` 里 ``$1`` 是**捕获组引用**
     ``Regex.replaceFirst(..., replacement)`` 与 Java 同义），而 Python 的
     ``re.sub`` 只认 ``\\1`` / ``\\g<1>``。书源库里 ``##.《([^》]+)》##$1###``
     这类写法非常常见，这里是必须做的翻译。
@@ -188,7 +188,7 @@ class AnalyzeRule:
         rule_list: list[SourceRule] = []
         mode = Mode.DEFAULT
         start = 0
-        # 仅首字符为 : 时视为"整条正则"（: 与 CSS 伪类冲突，Legado 自己也吐槽过）
+        # 仅首字符为 : 时视为"整条正则"（: 与 CSS 伪类冲突）
         if all_in_one and rule_str.startswith(":"):
             mode = Mode.REGEX
             self.is_regex = True
@@ -485,7 +485,7 @@ class AnalyzeRule:
 
     # JS 侧 java.* 的回调
     def js_get_string(self, rule: str, m_content: Any = None, is_url: bool = False) -> str:
-        """对应 Kotlin ``java.getString(rule, mContent?, isUrl?)``。
+        """对应 ``java.getString(rule, mContent?, isUrl?)``。
 
         ``m_content`` 用于"对另一段内容取规则"（如 ``java.ajax`` 的结果），
         不传则沿用当前内容。

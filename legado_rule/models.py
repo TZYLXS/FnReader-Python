@@ -1,6 +1,6 @@
 """最小数据模型：书源 / 书籍 / 章节 / 规则数据。
 
-Legado 的这几个类都实现 ``RuleDataInterface``（一套 ``getVariable`` /
+这几个类都实现 ``RuleDataInterface``（一套 ``getVariable`` /
 ``putVariable`` 的键值存储），``AnalyzeRule`` 的 ``put`` / ``get`` 正是沿着
 "chapter → book → ruleData → source" 这条链找变量的。这里保持同样的顺序。
 """

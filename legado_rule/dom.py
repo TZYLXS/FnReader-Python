@@ -1,6 +1,6 @@
 """DOM 层：用 lxml 复刻 jsoup 的若干取值语义。
 
-Legado 的 CSS 一侧完全建立在 jsoup 之上，而 jsoup 与 lxml 在细节上并不等价。
+CSS 一侧建立在 jsoup 之上，而 jsoup 与 lxml 在细节上并不等价。
 本模块把这些差异集中处理掉，供 :mod:`legado_rule.analyze_by_jsoup` 使用：
 
 * ``text()``          —— 拼接全部子孙文本，块级元素之间补空格，再压缩空白；

@@ -82,7 +82,7 @@ class AnalyzeByJSoup:
             if source_rule.is_css:
                 last_index = rule_str_x.rfind("@")
                 if last_index == -1:
-                    # Kotlin 这里 take(-1) 会抛异常，实际书源几乎不会出现；
+                    # take(-1) 在边界会抛异常，实际书源几乎不会出现；
                     # 这里退化为"整段都是选择器 + 空取值方式"。
                     selector, getter = rule_str_x, ""
                 else:
@@ -200,7 +200,7 @@ class AnalyzeByJSoup:
                 if text:
                     text_s.append(text)
         elif last_rule == "html":
-            # 注意：Kotlin 里 select("script").remove() 会真的改掉 DOM，
+            # 注意：select("script").remove() 会真的改掉 DOM，
             # 这里改为在副本上摘除，避免污染后续规则。
             for element in elements:
                 clone = dom.remove_tags(element, ("script", "style"))
@@ -231,7 +231,7 @@ class AnalyzeByJSoup:
 class ElementsSingle:
     """把 ``tag.div.-1:10:2`` / ``tag.a[!0,-1]`` 这类规则作用到一棵子树上。
 
-    对应 Kotlin 的 ``data class ElementsSingle``。索引集合是"逆序插入、逆序
+    ``ElementsSingle``。索引集合是"逆序插入、逆序
     展开"的，因为扫描是从字符串尾部往前的。
     """
 
@@ -347,7 +347,7 @@ class ElementsSingle:
         return elements
 
     # ------------------------------------------------------------------ #
-    # 索引串解析（严格按 Kotlin 的逆序扫描移植）
+    # 索引串解析（逆序扫描）
     # ------------------------------------------------------------------ #
     def find_index_set(self, rule: str) -> None:
         rus = (rule or "").strip()

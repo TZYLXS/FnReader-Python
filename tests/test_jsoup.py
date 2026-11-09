@@ -1,6 +1,6 @@
 """CSS / DOM 求值器测试。
 
-前半部分直接移植 Legado 仓库里的 ``AnalyzeByJSoupDomTest.kt``（自闭合标签、
+前半部分移植 ``AnalyzeByJSoupDomTest.kt``（自闭合标签、
 textNodes 语义、节点不被规则改动、排除式索引），后半部分是索引与尾缀的补充。
 """
 

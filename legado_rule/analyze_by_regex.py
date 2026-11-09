@@ -68,5 +68,5 @@ class AnalyzeByRegex:
 
 
 def split_not_blank(text: str, sep: str) -> list[str]:
-    """Kotlin 的 ``splitNotBlank``：切分后丢掉空白段。"""
+    """``splitNotBlank``：切分后丢掉空白段。"""
     return [part for part in (text or "").split(sep) if part.strip()]

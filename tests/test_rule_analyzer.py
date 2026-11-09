@@ -1,6 +1,6 @@
 """RuleAnalyzer（切分器）的行为测试。
 
-用例直接对照 Kotlin 版 ``RuleAnalyzer.kt`` 的语义：分隔符只在"规则层级"生效，
+用例直接对照 ``RuleAnalyzer.kt`` 的语义：分隔符只在"规则层级"生效，
 选择器/谓词/引号内的分隔符必须被跳过；``%%`` 是交叉合并而不是简单拼接。
 """
 
@@ -15,7 +15,7 @@ class SplitRuleTest(unittest.TestCase):
         self.assertEqual(RuleAnalyzer("a&&b&&c").split_rule("&&", "||", "%%"), ["a", "b", "c"])
 
     def test_first_separator_wins(self):
-        # Legado 的行为：命中哪个分隔符，整条规则就只按它切
+        # 命中哪个分隔符，整条规则就只按它切
         ra = RuleAnalyzer("a&&b||c")
         self.assertEqual(ra.split_rule("&&", "||", "%%"), ["a", "b||c"])
         self.assertEqual(ra.elements_type, "&&")
@@ -33,7 +33,7 @@ class SplitRuleTest(unittest.TestCase):
         self.assertEqual(ra.split_rule("||"), ["a[title='x||y']", "b"])
 
     def test_escaped_quote_inside_selector(self):
-        # 引号内不处理转义（Kotlin 原实现如此），因此 "x\" 会提前闭合，
+        # 引号内不处理转义（原实现如此），因此 "x\" 会提前闭合，
         # 后面的 ] 落在引号里 -> 括号层数不平衡 -> 抛错。这是"对齐缺陷"而非"修好"。
         with self.assertRaises(RuleAnalyzerError):
             RuleAnalyzer(r'a[title="x\"&&y"]&&b').split_rule("&&")

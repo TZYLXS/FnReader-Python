@@ -1,6 +1,6 @@
 """书源 → 前端参数。
 
-书源 JSON 有两种写法，Legado 都支持，这里也都要兼容：
+书源 JSON 有两种写法，都要兼容：
 
 * **分组写法**（现行标准）::
 
@@ -13,7 +13,7 @@
 
       "ruleSearchList": ..., "ruleSearchName": ..., "ruleBookContent": ...
 
-:meth:`_rule` 优先取分组值，取不到再回落扁平字段，与 Legado 的实体映射一致。
+:meth:`_rule` 优先取分组值，取不到再回落扁平字段，与实体映射一致。
 
 输出全部是纯 dict / list，``json.dumps`` 后前端直接消费 —— 前端不再需要自己
 解析规则，只负责渲染。
@@ -72,7 +72,7 @@ _FLAT_ALIAS = {
 def _guard(action: str, default: Any) -> Callable[[Callable], Callable]:
     """单条规则/单个站点出错不应该炸掉整条链路：记日志、返回空结构。
 
-    Legado 在调用侧（``BookSource.getBookList`` 等）也是 try/catch 后返回空
+    调用侧（``BookSource.getBookList`` 等）也是 try/catch 后返回空
     列表 + 报错信息，这里把同样的策略下沉到引擎层。
     """
     def deco(fn: Callable) -> Callable:
@@ -160,7 +160,7 @@ class BookSourceEngine:
     # ------------------------------------------------------------------ #
     @staticmethod
     def split_options(url_rule: str) -> tuple[str, dict[str, Any]]:
-        """拆出 ``url,{...}`` 尾部的请求选项（Legado 的 AnalyzeUrl 语法）。"""
+        """拆出 ``url,{...}`` 尾部的请求选项（AnalyzeUrl 语法）。"""
         m = re.match(r"^(.*),\s*(\{[\s\S]*\})\s*$", url_rule)
         if m and m.group(1) and not m.group(1).strip().startswith("{"):
             try:
@@ -198,7 +198,7 @@ class BookSourceEngine:
         return self._absolutize(url), options
 
     def _absolutize(self, url: str) -> str:
-        """相对 URL 一律按 bookSourceUrl 补全（Legado 的 AnalyzeUrl 同样如此）。"""
+        """相对 URL 一律按 bookSourceUrl 补全（同样如此）。"""
         if not url or re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", url):
             return url
         base = self.base.book_source_url or ""

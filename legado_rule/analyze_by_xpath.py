@@ -1,6 +1,6 @@
 """XPath 求值器 —— AnalyzeByXPath.kt 的移植。
 
-底层能力用 lxml 的 XPath 1.0（libxml2），比 Legado 依赖的 JsoupXpath 更完整。
+底层能力用 lxml 的 XPath 1.0（libxml2），比 JsoupXpath 更完整。
 取值语义按 JsoupXpath 的 ``JXNode.asString()`` 对齐：
 
 * 元素节点   → ``outerHtml``（JsoupXpath 里就是 ``Element.toString()``）
@@ -126,7 +126,7 @@ class AnalyzeByXPath:
         return result
 
     def get_string(self, rule: str) -> str | None:
-        """注意：Kotlin 这里只切 ``&&``/``||``，不切 ``%%``，结果用 ``\\n`` 连接。"""
+        """注意：这里只切 ``&&``/``||``，不切 ``%%``，结果用 ``\\n`` 连接。"""
         analyzer = RuleAnalyzer(rule)
         rules = analyzer.split_rule("&&", "||")
         if len(rules) == 1:

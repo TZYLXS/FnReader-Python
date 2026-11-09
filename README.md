@@ -1,9 +1,9 @@
-# legado_rule
+# FnReader-Python
 
-Legado（「阅读」App）书源规则解析器的**纯 Python** 实现。语义对齐官方 Kotlin 实现
-（`LegadoTeam/legado` master 分支 `app/src/main/java/io/legado/app/model/analyzeRule/`）。
+FnReader 的 Python 书源解析后端，纯 Python 实现书源规则求值。
 
 解析结果直接产出结构化参数，交给 FPK 前端渲染 —— 前端不需要再解析规则，也不经过 node.js。
+Python 包名仍为 `legado_rule`，import 路径不变。
 
 ## 快速开始
 
@@ -50,12 +50,12 @@ body   = engine.content(tocs[0]["url"])
 python -m unittest discover -s tests -v
 ```
 
-94 个用例，包含 Legado 官方 `AnalyzeByJSoupDomTest` 的移植用例、端到端离线链路、17,077 条真实书源回归。
+94 个用例，含端到端离线链路与 17,077 条真实书源回归。
 
 ## 文档
 
 - `接口说明.md` —— 全部类/方法/字段/规则语法，含可跑的离线实测输出
-- `实现说明.md` —— 逐条语义、Kotlin↔Python 对照、性能数据、已知差异
+- `实现说明.md` —— 逐条语义、性能数据、已知差异
 
 ## 示例脚本
 

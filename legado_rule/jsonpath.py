@@ -1,6 +1,6 @@
 """JSONPath 求值器 —— AnalyzeByJSonPath.kt 的移植（自研实现）。
 
-Legado 用的是 jayway JsonPath。Python 环境里 ``jsonpath_ng`` 语法与 jayway 差别
+jayway JsonPath。Python 环境里 ``jsonpath_ng`` 语法与 jayway 差别
 较大（尤其是 ``$..x``、``[?...]`` 过滤器、``.length()`` 函数），因此这里按
 jayway 的语法自己实现一个子集，覆盖书源里实际出现的写法：
 

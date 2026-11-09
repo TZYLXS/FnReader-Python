@@ -81,7 +81,7 @@ class XPathTest(unittest.TestCase):
         self.assertEqual(value, '<p class="item"><a href="/b/1">第一本</a></p>')
 
     def test_attribute(self):
-        # 多个节点命中时按 \n 拼接（Kotlin 用 TextUtils.join("\n")）
+        # 多个节点命中时按 \n 拼接
         self.assertEqual(self.rule.get_string("//p/a/@href"), "/b/1\n/b/2")
 
     def test_list(self):
@@ -95,7 +95,7 @@ class XPathTest(unittest.TestCase):
         self.assertEqual(self.rule.get_string("@XPath://p[@class='item'][2]/a/text()"), "第二本")
 
     def test_td_wrapping(self):
-        # 规则以 </td> 结尾时 Legado 会包一层 <tr>，否则 XPath 解析不出根节点
+        # 规则以 </td> 结尾时 会包一层 <tr>，否则 XPath 解析不出根节点
         rule = AnalyzeRule().set_content('<td class="c">单元格</td>', "https://ex.com")
         self.assertEqual(rule.get_string("//td[@class='c']/text()"), "单元格")
 

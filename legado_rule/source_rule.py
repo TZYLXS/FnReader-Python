@@ -41,14 +41,14 @@ class NotStandardJSON(Exception):
     pass
 
 
-# \$\d{1,2} —— Kotlin 的 regexPattern，用于识别 $1 / $12 这类分组引用
+# \$\d{1,2} —— regexPattern，用于识别 $1 / $12 这类分组引用
 REGEX_PATTERN = re.compile(r"\$\d{1,2}")
 
 
 def _load_json_lenient(text: str) -> Any:
     """尽量把 @put 里的 JSON 解析出来。
 
-    Legado 先用严格解析，失败再退回宽松解析（会打一条"JSON 格式不规范"的
+    先用严格解析，失败再退回宽松解析（会打一条"JSON 格式不规范"的
     日志）。这里用同样的两步，只是把"宽松"实现为"去掉尾逗号/单引号修正"这样
     的最小集合，足够覆盖书源里的常见脏数据。
     """
@@ -119,7 +119,7 @@ class SourceRule:
     # 模式判定
     # ------------------------------------------------------------------ #
     def _init_rule(self, rule_str: str) -> str:
-        # Kotlin 的 when 分支顺序不能改，尤其 @CSS: 与 @@ 的顺序、
+        # when 分支顺序不能改，尤其 @CSS: 与 @@ 的顺序、
         # 以及 isJSON 与 "/" 开头的先后。
         if self.mode in (Mode.JS, Mode.REGEX):
             return rule_str
@@ -191,7 +191,7 @@ class SourceRule:
                 low = token.lower()
                 if low.startswith("@get:"):
                     self.rule_type.append(self.GET_RULE_TYPE)
-                    # Kotlin: tmp.substring(6, tmp.lastIndex) —— 去掉 @get:{ 与 }
+                    # tmp.substring(6, tmp.lastIndex) —— 去掉 @get:{ 与 }
                     self.rule_param.append(token[6:-1])
                 elif token.startswith("{{"):
                     self.rule_type.append(self.JS_RULE_TYPE)
@@ -262,7 +262,7 @@ class SourceRule:
 
     @staticmethod
     def _is_rule(rule_str: str) -> bool:
-        # Kotlin: 以 @ 开头 / $.(或 $[) 开头 / // 开头 → 当规则；否则当 JS 表达式
+        # 以 @ 开头 / $.(或 $[) 开头 / // 开头 → 当规则；否则当 JS 表达式
         return (
             rule_str.startswith("@")
             or rule_str.startswith("$.")

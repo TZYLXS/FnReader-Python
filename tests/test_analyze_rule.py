@@ -72,7 +72,7 @@ class ReplaceTest(unittest.TestCase):
         self.assertEqual(self.rule.get_string("class.t@text##[一二]##X"), "XX三")
 
     def test_invalid_regex_falls_back_to_literal(self):
-        # 正则编译失败时 Kotlin 退回"字面串替换"
+        # 正则编译失败时退回"字面串替换"
         self.assertEqual(self.rule.get_string("class.t@text##[一二##X"), "一二三")
 
     def test_replace_first_variant(self):
@@ -112,7 +112,7 @@ class VariableTest(unittest.TestCase):
         self.assertEqual(ar.get("bn"), "书名")
 
     def test_eval_token_forces_regex_mode(self):
-        # 对齐 Kotlin 的怪行为：规则体里出现 {{ }} 会把整条规则切成 Regex，
+        # 怪行为：规则体里出现 {{ }} 会把整条规则切成 Regex，
         # 于是拼接后的 CSS 文本被当正则，匹配不到 -> 空串。
         ar = AnalyzeRule().set_content("<p class='n'>书名</p><p class='u'>作者</p>", "https://e.com")
         ar.put("bn", "书名")
@@ -125,7 +125,7 @@ class VariableTest(unittest.TestCase):
 
     def test_dollar_param_when_not_list_keeps_literal(self):
         # 内容不是 list 时 $n 保留字面量；但 $n 又会把整条规则切成 Regex，
-        # 于是 "$0" 被当正则匹配到末尾空串 -> 结果为空。Kotlin 同样如此。
+        # 于是 "$0" 被当正则匹配到末尾空串 -> 结果为空。
         ar = AnalyzeRule().set_content("plain", "https://e.com")
         self.assertEqual(ar.get_string("$0"), "")
 

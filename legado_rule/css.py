@@ -1,6 +1,6 @@
 """CSS 选择器执行层。
 
-Legado 用的是 jsoup 的选择器引擎，它支持一部分 CSS4 语法以及若干自有的
+jsoup 的选择器引擎，它支持一部分 CSS4 语法以及若干自有的
 伪类（``:contains``、``:containsOwn``、``:matches``、``:has``、``:eq``、
 ``:lt``、``:gt``）。Python 侧主引擎用 ``cssselect`` 翻译成 XPath，遇到
 cssselect 不认的 jsoup 伪类再退化成"先选基集，再在 Python 里过滤"。

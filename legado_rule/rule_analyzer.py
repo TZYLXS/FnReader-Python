@@ -1,6 +1,6 @@
 """规则切分器 —— RuleAnalyzer.kt 的逐行移植。
 
-Legado 的切分器刻意不用正则，而是自己维护一个游标 (pos/start/startX) 在
+切分器刻意不用正则，而是自己维护一个游标 (pos/start/startX) 在
 原始字符串上扫描。这样做有两个目的：
 
 1. 规则里的 ``&&`` / ``||`` / ``%%`` 只有在"规则层级"才是分隔符，
@@ -25,11 +25,11 @@ ESC = "\\"
 
 
 class RuleAnalyzerError(ValueError):
-    """平衡组未闭合。对应 Kotlin 里的 ``throw Error("...后未平衡")``。"""
+    """平衡组未闭合。``throw Error("...后未平衡")``。"""
 
 
 class RuleAnalyzer:
-    """按 Legado 的游标扫描算法切分规则字符串。"""
+    """按游标扫描算法切分规则字符串。"""
 
     def __init__(self, data: str, code: bool = False) -> None:
         self.queue: str = data or ""
@@ -40,7 +40,7 @@ class RuleAnalyzer:
         self.step: int = 0
         self.elements_type: str = ""
         self.code: bool = code
-        # Kotlin: val chompBalanced = if (code) ::chompCodeBalanced else ::chompRuleBalanced
+        # val chompBalanced = if (code) ::chompCodeBalanced else ::chompRuleBalanced
         self.chomp_balanced: Callable[[str, str], bool] = (
             self.chomp_code_balanced if code else self.chomp_rule_balanced
         )
@@ -51,7 +51,7 @@ class RuleAnalyzer:
     def trim(self) -> None:
         """修剪当前规则之前的 ``@`` 或者空白符。
 
-        对应 Kotlin 的 ``trim()``。注意它同时推进 ``start`` 与 ``startX``，
+        对应 ``trim()``。注意它同时推进 ``start`` 与 ``startX``，
         而不是只推进游标。
         """
         n = len(self.queue)
@@ -263,7 +263,7 @@ class RuleAnalyzer:
                     break
 
             self.start = self.pos
-            # Kotlin: return splitRule(*split) —— 回到循环顶部重新 consumeToAny
+            # return splitRule(*split) —— 回到循环顶部重新 consumeToAny
 
     def _split_rule_next(self) -> list[str]:
         """二段匹配：``elementsType`` 已确定，直接按它查找，比首段更快。"""
@@ -321,7 +321,7 @@ class RuleAnalyzer:
     ) -> str:
         """替换 ``{$...}`` 形式的嵌套规则（JSONPath 用）。
 
-        返回值语义：如果一次都没有成功替换，返回空串（Kotlin 用 ``startX == 0``
+        返回值语义：如果一次都没有成功替换，返回空串（``startX == 0``
         判断），调用方据此决定"整条规则是否就是内嵌规则"。
         """
         if fr is None:

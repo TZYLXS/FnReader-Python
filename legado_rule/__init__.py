@@ -1,4 +1,4 @@
-"""legado_rule —— Legado（「阅读」App）书源规则解析器的 Python 版。
+"""legado_rule —— FnReader-Python 书源规则解析器。
 
 对外只需要两样东西：
 
