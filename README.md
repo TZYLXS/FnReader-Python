@@ -66,4 +66,4 @@ python examples/demo.py         # 单条规则演示
 
 ## 许可
 
-仅用于个人学习与自用书源解析。请遵守目标站点的使用条款。
+GPL-2.0-or-later。详见 [LICENSE](LICENSE)。
