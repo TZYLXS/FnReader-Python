@@ -56,7 +56,6 @@ python -m unittest discover -s tests -v
 
 - `接口说明.md` —— 全部类/方法/字段/规则语法，含可跑的离线实测输出
 - `实现说明.md` —— 逐条语义、Kotlin↔Python 对照、性能数据、已知差异
-- `FnReader缺陷.md` —— FnReader（FPK 宿主应用）的代码缺陷清单
 
 ## 示例脚本
 
